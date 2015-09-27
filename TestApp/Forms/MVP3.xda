@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp comments="tablelayout for mvp2 + close button + label">
+	<blockWeb id="t1">
+		<blocks>
+			<block className="TableLayout">
+				<actions>
+					<attachEndPoint connectorKey="Rows">
+						<valueEndPoint type="System.Int32" value="3" />
+					</attachEndPoint>
+					<attachEndPoint connectorKey="Columns">
+						<valueEndPoint type="System.Int32" value="2" />
+					</attachEndPoint>
+					<attachEndPoint connectorKey="ColumnStyles">
+						<valueEndPoint type="System.String[]" separator="," value="40%,60%" />
+					</attachEndPoint>
+					<setProperty connectorKey="Dock" value="Fill" />
+				</actions>
+				<blockWeb>
+					<blocks>
+						<block className="Label" template="tabledBlock">
+							<templateArgs>
+								<valueArg argKey="R" value="0" />
+								<valueArg argKey="C" value="0" />
+							</templateArgs>
+							<actions>
+								<setProperty connectorKey="Text" value="Please enter one item: " />
+							</actions>
+						</block>
+						<block className="TextBox" id="txt1" template="tabledBlock">
+							<templateArgs>
+								<valueArg argKey="R" value="0" />
+								<valueArg argKey="C" value="1" />
+							</templateArgs>
+							<actions>
+								<setProperty connectorKey="Text" value="Hello World!" />
+							</actions>
+						</block>
+
+						<block className="DropDown" id="ddl1" template="tabledBlock">
+							<templateArgs>
+								<valueArg argKey="R" value="1" />
+								<valueArg argKey="C" value="0" />
+							</templateArgs>
+						</block>
+						
+						<block className="Button" id="cmdOk" template="tabledBlock">
+							<templateArgs>
+								<valueArg argKey="R" value="1" />
+								<valueArg argKey="C" value="1" />
+							</templateArgs>
+							<actions template="ac1" />
+							<actions>
+								<attachEndPoint connectorKey="Click">
+									<serviceEndPoint blockId="ddl1" service="AddItem">
+										<fixedArgs>
+											<serviceEndPoint blockId="txt1" service="GetValue" />
+										</fixedArgs>
+									</serviceEndPoint>
+								</attachEndPoint>
+							</actions>
+						</block>
+						<block className="Button" template="tabledBlock">
+							<templateArgs>
+								<valueArg argKey="R" value="2" />
+								<valueArg argKey="C" value="0" />
+							</templateArgs>
+							<actions>
+								<attachEndPoint connectorKey="Click">
+									<serviceEndPoint blockId="frmMain" service="Close">
+									</serviceEndPoint>
+								</attachEndPoint>
+							<setProperty connectorKey="Text" value="Close" />
+							</actions>
+						</block>
+					</blocks>
+				</blockWeb>
+			</block>
+		</blocks>
+	</blockWeb>
+	<blocks id="t2">
+		<block className="WinForm" id="frmMain">
+			<blockWeb template="blockWeb[t1]" />
+		</block>
+	</blocks>
+
+	<actions id="ac1">
+		<setProperty connectorKey="Dock" value="None" />
+		<setProperty connectorKey="Text" value="#aa" />
+	</actions>
+
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+		</blocks>
+		<blocks template="t2">
+			
+		</blocks>
+	</blockWeb>
+	<block id="tabledBlock">
+		<actions>
+			<setProperty connectorKey="Column" value="#C" type="System.Int32" />
+			<setProperty connectorKey ="Row" value="#R" type="System.Int32" />
+		</actions>
+	</block>
+</blockApp>

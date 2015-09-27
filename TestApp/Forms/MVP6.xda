@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp author="mahdi">
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+			<block id="frmMain"  className="WinForm" >
+				<actions>
+					<setProperty connectorKey="Text" value="RowFetcher" />
+				</actions>
+				<blockWeb>
+					<blocks>
+						<block className="TextBox" id="txt" />
+						<block className="Button" id="cmdOK" />
+						<block className="Label" id="lblResult">
+							<actions>
+								<setProperty connectorKey="Text" value="default" />
+							</actions>
+						</block>
+						<block id="rf" className="RowFetcher" />
+					</blocks>
+					<actions>
+						<attachEndPoint blockId="cmdOK" connectorKey="Click">
+							<serviceEndPoint blockId="lblResult" service="SetValue">
+								<fixedArgs>
+									<serviceEndPoint blockId="rf" service="FetchRow">
+										<fixedArgs>
+											<serviceEndPoint blockId="txt" service="GetValue" />
+										</fixedArgs>
+									</serviceEndPoint>
+								</fixedArgs>
+							</serviceEndPoint>
+						</attachEndPoint>
+					</actions>
+				</blockWeb>
+			</block>
+		</blocks>
+	</blockWeb>
+</blockApp>

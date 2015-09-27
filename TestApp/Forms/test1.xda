@@ -1,0 +1,12 @@
+﻿#register<WinBlocks.dll>
+#define a b
+#define a1(x, y, z) b+x+y+z
+blockWeb test1
+{
+	block cmdOK: Button;
+	cmdOK.Click += {112};
+	blockWeb {cmdOK}
+	{
+		block cmdCancel: Button;
+	}
+}

@@ -1,0 +1,88 @@
+"Case Sensitive" = True
+"Start Symbol" = <CommandList>
+
+{Quote} = ['']
+{StringCh} = {All Valid} - ["\]
+{LitStringCh}  = {All Valid} - ["]
+{IDHead} = {Letter} + {Letter Extended} + [_] - [!] - [(] - [@]
+{IDTail} = {AlphaNumeric} + {Letter Extended} + [_]
+{FilePathChar} = {Printable}- ['>']                 
+StringLiteral  = '"'( {StringCh} | '\'{Printable} )* '"' !| '@' ('"' {LitStringCh}+ '"')+
+Identifier = {IDHead} {IDTail}*
+Integer = {Digit}+
+!AttachOperator = '=' | '+='
+!ConditionOp = '==' | '!='
+GeneralObject = '{' {Printable}+ '}'
+FilePathIdentifier = '<' + ({FilePathChar} | '\' | '.')+ '>'
+                             
+Comment Start = '/*'
+Comment End   = '*/'
+Comment Line  = '//'
+              
+<Object> ::= Integer | StringLiteral | GeneralObject | 'null' | 'true' | 'false'
+<OptObjOrCallList> ::= <ObjOrCallList> | 
+<ObjOrCallList> ::= <ObjOrCall> ',' <ObjOrCallList> | <ObjOrCall>
+<ObjOrCall> ::= <GeneralAddress> '(' <OptObjOrCallList> ')' | <Object> | Identifier
+<GeneralAddress> ::= <Address> | '!' <Address>
+<Address> ::= Identifier | Identifier '.' Identifier | Identifier '.' Identifier '.' Identifier                        
+<OptArgList> ::= <ArgList> |
+<ArgList> ::= Identifier ',' <ArgList> | Identifier
+<AttachSuffix> ::= '[' 'create' ']' | 
+
+<CommandList> ::= <Commands> | 
+<Commands> ::= <Command> <Commands> | <Command> | <Preprocessor> <Commands> | <Preprocessor>            
+<Command> ::= <BlockWebCmd> | <BlockCmd> | <IfCmd> | <ProcessRequestCmd> | <AttachEndpointCmd> | <ReferenceCmd> | <VarDefCmd> | <WhileCmd> | <BreakCmd> | <ContinueCmd>
+
+<Preprocessor> ::= <RegisterCmd> | <DefineCmd> | <DefBlockCmd>
+!innerBlockWebs cannot be defined as template
+<BlockWebCmd> ::= 'blockWeb' Identifier <BlockWebImport> <BlockWebSuffix> <CommandBlock>
+<BlockWebImport> ::= '[' <ArgList> ']' |
+<BlockWebSuffix> ::= ':' 'abstract' |  ':' 'abstract' ',' 'remotable' |  ':' 'remotable' |
+
+<ContinueCmd> ::= 'continue'';'
+<BreakCmd> ::= 'break' ';'                               
+<RegisterCmd> ::= '#' 'register' FilePathIdentifier
+<DefineCmd> ::= '#' 'define' <DefSignature> <DefineBody>
+<DefSignature> ::= Identifier '(' <OptArgList> ')'   
+<DefineBody> ::= <CommandBlock>        
+
+<BlockCmd> ::= 'block' Identifier ':' <BlockHandle> <BlockWebImport> <BlockRemotableType> <CommandBlock> | 'block' Identifier <BlockImport> <BlockWebImport> <CommandBlock>
+<BlockHandle> ::= Identifier  
+               | Identifier '(' Identifier ')'  
+               | Identifier '(' Identifier ',' Identifier '.' Identifier '.' Identifier '.' Identifier ')' 
+<BlockImport> ::= ':' Identifier '.' Identifier
+<BlockRemotableType> ::= 'remotable' | 
+!<BlockImportList> ::= <Address> ',' <BlockImportList> | <Address>
+
+<CommandBlock> ::= ';' | '{' <CommandList> '}' | <Command>
+<ProcessRequestCmd> ::=  <Address> '(' <OptObjOrCallList> ')' ';'  
+<AttachEndpointCmd> ::= '!' <Address> <AttachMode> '=' <Endpoint> <AttachSuffix> ';'
+<OptIdentifier> ::= ',' Identifier |
+<AttachMode> ::= '[' 'B' <OptIdentifier> ']' | '[' 'I' <OptIdentifier> ']' | '[' 'A' <OptIdentifier> ']' |
+<Endpoint> ::= '&' <Address> | '!' <Address> | <Object> | Identifier  
+<IfCmd> ::= 'if' <Condition> <CommandBlock> 
+         | 'if' <Condition> <CommandBlock> 'else' <CommandBlock>
+<Condition> ::= '(' '~' <Address> '(' <OptObjOrCallList> ')' ')' | '(' <Address> '(' <OptObjOrCallList> ')' ')'
+!Reference command is used for command based defines and not token/identifier based ones.
+!token based defines are handled during pre-processing
+<ReferenceCmd> ::= '[' Identifier '(' <OptObjOrCallList> ')' ']' ';'
+<VarDefCmd> ::= 'var' Identifier '=' <VarDefCmdValue> ';' | Identifier '=' <VarDefCmdValue> ';'
+<VarDefCmdValue> ::= <GeneralAddress> '(' <OptObjOrCallList> ')' | <Object> | Identifier | '[' 'uid' ']'
+                  
+<WhileCmd> ::= 'while' <Condition> <CommandBlock> | 'do' <CommandBlock> 'while' <Condition> ';'
+
+                
+<DefBlockCmd> ::= '#' 'block' Identifier <DefBlockBase> '{' <DefBlockBody> '}'
+<DefBlockBase> ::= ':' <BlockHandle> |
+<DefBlockBodyItem> ::= <DefBlockService> | <DefBlockConnector> 
+<DefBlockBody> ::=  <DefBlockBodyItem> <DefBlockBody> | <DefBlockBodyItem>
+<DefBlockConnector> ::= 'connector' Identifier ';'
+<DefBlockService> ::= 'service' Identifier '(' <OptArgList> ')' '{' <DefBlockServiceBody> '}'
+                   
+<DefBlockServiceLine> ::= <DefBlockServiceBodyModifier> <GeneralAddress> '(' <OptObjOrCallList> ')' ';' 
+                       | <DefBlockServiceBodyModifier> Identifier ';' 
+                       | <DefBlockServiceBodyModifier> <Object> ';'
+                       | <Address> '=' <Endpoint> <AttachSuffix> ';'
+<DefBlockServiceBody> ::= <DefBlockServiceLine> <DefBlockServiceBody> | <DefBlockServiceLine>
+<DefBlockServiceBodyModifier> ::= 'return' | 
+

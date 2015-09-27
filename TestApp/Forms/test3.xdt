@@ -1,0 +1,2 @@
+﻿#define pp 1
+#define end(q) q

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp author="mahdi">
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+			<block id="frmMain"  className="WinForm" >
+				<actions>
+					<setProperty connectorKey="Text" value="Calculator" />
+				</actions>
+				<blockWeb>
+					<blocks>
+						<block className="TextBox" id="txt1" />
+						<block className="TextBox" id="txt2" />
+						<block className="TextBox" id="txt3" />
+						<block className="Button" id="cmdOK" />
+					</blocks>
+					<actions>
+						<!-- var v1 = cmdOK.Cast(txt1.GetValue) -->
+						<!-- v2 = cmdOK.Cast(txt2.GetValue) -->
+						<!-- cmdOK.Click = txt3.SetValue(cmdOK.Add(v1, v2)) -->
+						<!-- txt1.t = 23 { System.Int32} -->
+						<!-- txt1.t = 23,14,15 { Array[], System.Int32, ','} -->
+						<attachEndPoint>
+						</attachEndPoint>
+						<attachEndPoint blockId="cmdOK" connectorKey="Click">
+							<serviceEndPoint template="sep1" />
+						</attachEndPoint>
+					</actions>					
+				</blockWeb>
+			</block>
+		</blocks>
+	</blockWeb>
+	<serviceEndPoint id="sep1" blockId="txt3" service="SetValue">
+		<fixedArgs>
+			<serviceEndPoint blockId="cmdOK" service="Add">
+				<fixedArgs>
+					<serviceEndPoint blockId="cmdOK" service="Cast">
+						<fixedArgs>
+							<serviceEndPoint blockId="txt1" service="GetValue" />
+						</fixedArgs>
+					</serviceEndPoint>
+					<serviceEndPoint blockId="cmdOK" service="Cast">
+						<fixedArgs>
+							<serviceEndPoint blockId="txt2" service="GetValue" />
+						</fixedArgs>
+					</serviceEndPoint>
+				</fixedArgs>
+			</serviceEndPoint>
+		</fixedArgs>
+	</serviceEndPoint>
+</blockApp>

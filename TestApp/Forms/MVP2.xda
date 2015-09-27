@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp comments="a form with a textbox/ddl/button: when button is clicked textbox text is added to ddl">
+	<blockWeb id="t1">
+		<blocks>
+			<block className="DropDown" id="ddl1"></block>
+			
+			<block className="Button" id="cmdOk">
+				<actions template="ac1" />
+				<actions>
+					<attachEndPoint connectorKey="Click">
+						<serviceEndPoint blockId="ddl1" service="AddItem">
+							<fixedArgs>
+								<serviceEndPoint blockId="txt1" service="GetValue" />
+							</fixedArgs>
+						</serviceEndPoint>
+					</attachEndPoint>
+				</actions>
+			</block>
+
+			<block className="TextBox" id="txt1">
+				<actions>
+					<setProperty connectorKey="Text" value="Hello World!" />
+				</actions>
+			</block>
+
+			
+		</blocks>
+	</blockWeb>
+	<blocks id="t2">
+		<block className="WinForm" id="frmMain">
+			<blockWeb template="blockWeb[t1]" />
+		</block>
+	</blocks>
+
+	<actions id="ac1">
+		<setProperty connectorKey="Dock" value="None" />
+		<setProperty connectorKey="Text" value="#aa" />
+	</actions>
+
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+		</blocks>
+		<blocks template="t2">
+		</blocks>
+	</blockWeb>
+
+</blockApp>

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0510DD5-806D-4B3D-96DA-1613F7B61543}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdminConsole</RootNamespace>
+    <AssemblyName>AdminConsole</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>user_admin_gear.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AC.ScintillaNet">
+      <HintPath>..\Lib\AC.ScintillaNet.dll</HintPath>
+    </Reference>
+    <Reference Include="sliver.Windows.Forms.StateBrowser">
+      <HintPath>..\Lib\sliver.Windows.Forms.StateBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\CmdBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Code\CmdBox.Designer.cs">
+      <DependentUpon>CmdBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\frmCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\frmCode.Designer.cs">
+      <DependentUpon>frmCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\IMemScript.cs" />
+    <Compile Include="Code\IMemScriptHelper.cs" />
+    <EmbeddedResource Include="Code\frmCode.resx">
+      <DependentUpon>frmCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\MemScript.cs" />
+    <Compile Include="ctlValuesPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlValuesPicker.Designer.cs">
+      <DependentUpon>ctlValuesPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ctlValuePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlValuePicker.Designer.cs">
+      <DependentUpon>ctlValuePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ctlWebTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlWebTree.Designer.cs">
+      <DependentUpon>ctlWebTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddBlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddBlock.Designer.cs">
+      <DependentUpon>frmAddBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddBlockWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddBlockWeb.Designer.cs">
+      <DependentUpon>frmAddBlockWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddParameter.Designer.cs">
+      <DependentUpon>frmAddParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAttachEndPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAttachEndPoint.Designer.cs">
+      <DependentUpon>frmAttachEndPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoker.Designer.cs">
+      <DependentUpon>frmInvoker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeNodes\BaseNode.cs" />
+    <Compile Include="TreeNodes\Nodes\BlockWebNodeManager.cs" />
+    <Compile Include="TreeNodes\Nodes\Collection\PeersNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\BlockNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Collection\BlocksNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\BlockWebNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\ConnectorNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Collection\ConnectorsNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Collection\EndPointsNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\EndPointNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\PeerNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Single\ServiceNode.cs" />
+    <Compile Include="TreeNodes\Nodes\Collection\ServicesNode.cs" />
+    <EmbeddedResource Include="Code\CmdBox.resx">
+      <DependentUpon>CmdBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlValuesPicker.resx">
+      <DependentUpon>ctlValuesPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlValuePicker.resx">
+      <DependentUpon>ctlValuePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlWebTree.resx">
+      <DependentUpon>ctlWebTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddBlock.resx">
+      <DependentUpon>frmAddBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddBlockWeb.resx">
+      <DependentUpon>frmAddBlockWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddParameter.resx">
+      <DependentUpon>frmAddParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAttachEndPoint.resx">
+      <DependentUpon>frmAttachEndPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoker.resx">
+      <DependentUpon>frmInvoker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="user_admin_gear.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockBroker\BlockBroker.csproj">
+      <Project>{11941b82-e131-4776-9fd5-89037025c1de}</Project>
+      <Name>BlockBroker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DCRF\DCRF.csproj">
+      <Project>{6a64b722-8f06-40b6-aad3-3321baf69dc1}</Project>
+      <Name>DCRF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetSockets\NetSockets.csproj">
+      <Project>{bd34bebb-9ee0-4d18-b504-c2f522925642}</Project>
+      <Name>NetSockets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

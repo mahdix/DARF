@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ScintillaNET>
+
+	<Language Name="blockApp">
+		<Indentation TabWidth="2" UseTabs="true"/>
+		
+		<Lexer StreamCommentPrefix="/*" StreamCommentSuffix="*/" LexerName="cpp" LineCommentPrefix="//" >
+			<Keywords List="0"  Inherit="False">
+				define include register block blockWeb if else var null create connector service return do while abstract true false uid
+				remotable break continue
+			</Keywords>
+		</Lexer>
+
+		<AutoComplete FillUpCharacters="" SingleLineAccept="True" IsCaseSensitive="True">
+			<List>
+				define include register block blockWeb if else var null create connector service return do while abstract true false uid
+				remotable break continue
+			</List>
+		</AutoComplete>
+		
+	</Language>
+</ScintillaNET>

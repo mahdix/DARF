@@ -1,0 +1,6 @@
+﻿2.0.1.1
+	Block ids is now a string (not a random GUID) which can be specified by creator 
+	Added support to load blockweb and all its data from xml files
+	Added xsd file to support intellisense in blockweb xml authoring
+	added template and templateArgs support to xml
+	added include tag to xml

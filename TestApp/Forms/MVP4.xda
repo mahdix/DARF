@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp author="mahdi">
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+			<block id="frmMain"  className="WinForm" >
+				<actions>
+					<setProperty connectorKey="Text" value="About" />
+				</actions>
+				<blockWeb>
+					<blocks>
+						<block className="Label">
+							<actions>
+								<setProperty connectorKey="Text" value="this is an about form! copyright 2013" />
+							</actions>
+						</block>
+					</blocks>
+				</blockWeb>
+			</block>
+		</blocks>
+	</blockWeb>
+</blockApp>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D43EB80A-8A58-445A-AC52-421298E16763}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlockApp</RootNamespace>
+    <AssemblyName>BlockApp</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="bsn.GoldParser">
+      <HintPath>..\Lib\bsn.GoldParser.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComplexData\ITupleManager.cs" />
+    <Compile Include="ComplexData\SimpleRow.cs" />
+    <Compile Include="ComplexData\SimpleTable.cs" />
+    <Compile Include="ComplexData\Tuple.cs" />
+    <Compile Include="ComplexData\TupleCollection.cs" />
+    <Compile Include="ComplexData\TupleManager.cs" />
+    <Compile Include="Grammar\AddressHandler.cs" />
+    <Compile Include="Grammar\AttachEndPointCmd.cs" />
+    <Compile Include="Grammar\BlockCmd.cs" />
+    <Compile Include="Grammar\BlockWebCmd.cs" />
+    <Compile Include="Grammar\BreakCmd.cs" />
+    <Compile Include="Grammar\CommandBlock.cs" />
+    <Compile Include="Grammar\CommandHandler.cs" />
+    <Compile Include="Grammar\BlockDefCmd.cs" />
+    <Compile Include="Grammar\Condition.cs" />
+    <Compile Include="Grammar\ContinueCmd.cs" />
+    <Compile Include="Grammar\DefineCmd.cs" />
+    <Compile Include="Grammar\ExecutionContext.cs" />
+    <Compile Include="Grammar\Identifier.cs" />
+    <Compile Include="Grammar\IfCmd.cs" />
+    <Compile Include="Grammar\Token.cs" />
+    <Compile Include="Grammar\ObjectHolder.cs" />
+    <Compile Include="Grammar\ObjectOrCall.cs" />
+    <Compile Include="Grammar\Optional.cs" />
+    <Compile Include="Grammar\ProcessRequestCmd.cs" />
+    <Compile Include="Grammar\ReferenceCmd.cs" />
+    <Compile Include="Grammar\RegisterCmd.cs" />
+    <Compile Include="Grammar\TokenList.cs" />
+    <Compile Include="Grammar\VarDefCmd.cs" />
+    <Compile Include="Grammar\WhileCmd.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptEngine.cs" />
+    <Compile Include="ScriptReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="blockApp.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Grammar\src\BlockAppGrammar.egt" />
+    <EmbeddedResource Include="Grammar\src\BlockAppGrammar.grm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockBroker\BlockBroker.csproj">
+      <Project>{11941b82-e131-4776-9fd5-89037025c1de}</Project>
+      <Name>BlockBroker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DCRF\DCRF.csproj">
+      <Project>{6a64b722-8f06-40b6-aad3-3321baf69dc1}</Project>
+      <Name>DCRF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinBlocks\WinBlocks.csproj">
+      <Project>{14d19584-3ee4-4213-9351-8a51f6093562}</Project>
+      <Name>WinBlocks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

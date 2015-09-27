@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<blockApp comments="a form with a textbox and button: when button is clicked messagebox is shown: Hello X where x is textbox.text">
+	<blockWeb id="t1">
+		<blocks>
+			<block className="Button" id="cmdOk">
+				<actions template="ac1" />
+				<actions>
+					<attachEndPoint connectorKey="Click">
+						<serviceEndPoint service="Msg">
+							<fixedArgs>
+								<serviceEndPoint blockId="cmdOk" service="Merge">
+									<fixedArgs>
+										<valueEndPoint value="Hello " />
+										<serviceEndPoint blockId="txt1" service="GetValue" />										
+										<valueEndPoint value=" !" />
+									</fixedArgs>
+								</serviceEndPoint>
+							</fixedArgs>
+						</serviceEndPoint>
+					</attachEndPoint>
+				</actions>
+			</block>
+		
+			<block className="TextBox" id="txt1">
+				<actions>
+					<setProperty connectorKey="Text" value="Hello World!" />
+				</actions>
+			</block>
+		</blocks>
+	</blockWeb>
+	<blocks id="t2">
+		<block className="WinForm" id="frmMain">
+			<blockWeb template="blockWeb[t1]" />
+		</block>
+	</blocks>
+	
+	<actions id="ac1">		
+		<setProperty connectorKey="Dock" value="None" />
+		<setProperty connectorKey="Text" value="#aa" />
+	</actions>
+	
+	<blockWeb id="testForm">
+		<blocks>
+			<block className="CoordinatorBlock" id="_coordinator_">
+				<actions>
+					<setProperty create="true" connectorKey="FormId" value="frmMain" />
+				</actions>
+			</block>
+		</blocks>
+		<blocks template="t2">
+			
+		</blocks> 
+	</blockWeb>
+	
+</blockApp>

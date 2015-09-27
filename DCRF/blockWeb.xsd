@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="dcrf">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="blockWeb" type="blockWebType" />
+				<xs:element name="template" type="blockWebType" />
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="includeType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="templateArgs" type="templateArgsType" />
+		</xs:choice>
+		<xs:attribute name="template" />
+	</xs:complexType>
+
+	<xs:complexType name="blockWebType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="blocks">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="block" type="blockType" />
+						<xs:element name="include" type="includeType" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="actions" type="actionsType" />
+			<xs:element name="templateArgs" type="templateArgsType" />
+			<xs:element name="reference" type="referenceType" />
+			<xs:element name="include" type="includeType" />
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="template" type="xs:string" use="optional" />
+	</xs:complexType>
+	
+	<xs:complexType name="fixedArgsType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="valueEndPoint" type="valueEndPointType" />
+			<xs:element name="serviceEndPoint" type="serviceEndPointType" />
+			<xs:element name="connectorEndPoint" type="connectorEndPointType" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="serviceEndPointType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="fixedArgs" type="fixedArgsType" />
+		</xs:sequence>
+		
+		<xs:attribute name="service" type="xs:string" />
+		<xs:attribute name="targetType" type="xs:string" />
+		<xs:attribute name="blockId" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="connectorEndPointType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="fixedArgs" type="fixedArgsType" />
+		</xs:sequence>
+
+		<xs:attribute name="targetType" type="xs:string" />
+		<xs:attribute name="blockId" type="xs:string" />
+		<xs:attribute name="connectorKey" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="valueEndPointType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="item">
+				<xs:complexType>
+					<xs:sequence>
+					</xs:sequence>
+					<xs:attribute name="value" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		
+		<xs:attribute name="value" type="xs:string" use="optional" />
+		<xs:attribute name="i18nKey" type="xs:string" use="optional" />
+		<xs:attribute name="type" type="xs:string" use="optional" />
+		<xs:attribute name="separator" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="actionsType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="include" type="includeType" />
+			<xs:element name="attachServiceEndPoint">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="serviceEndPoint" minOccurs="1" type="serviceEndPointType" />
+					</xs:choice>
+					<xs:attribute name="connectorKey" type="xs:string" use="required" />
+					<xs:attribute name="blockId" type="xs:string" use="optional" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachConnectorEndPoint">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="connectorEndPoint" minOccurs="1" type="connectorEndPointType" />
+					</xs:sequence>
+					<xs:attribute name="connectorKey" type="xs:string" use="required" />
+					<xs:attribute name="blockId" type="xs:string" use="optional" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachValueEndPoint">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="valueEndPoint" minOccurs="1" type="valueEndPointType" />
+					</xs:sequence>
+					<xs:attribute name="connectorKey" type="xs:string" use="required" />
+					<xs:attribute name="blockId" type="xs:string" use="optional" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="setProperty" type="setPropertyType" />
+
+			<xs:element name="processRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fixedArgs" type="fixedArgsType" minOccurs="0" />
+					</xs:sequence>
+					<xs:attribute name="service" type="xs:string" use="required" />
+					<xs:attribute name="blockId" type="xs:string" use="optional" />
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="setVariable">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="1">
+						<xs:element name="serviceEndPoint" minOccurs="1" type="serviceEndPointType" />
+						<xs:element name="connectorEndPoint" minOccurs="1" type="connectorEndPointType" />
+						<xs:element name="valueEndPoint" minOccurs="1" type="valueEndPointType" />
+					</xs:choice>
+					<xs:attribute name="name" type="xs:string" use="required" />
+					<xs:attribute name="value" type="xs:string" use="optional" />
+					<xs:attribute name="type" type="xs:string" use="optional" />
+				</xs:complexType>
+			</xs:element>
+		
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="setPropertyType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="item">
+				<xs:complexType>
+					<xs:sequence>
+					</xs:sequence>
+					<xs:attribute name="value" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="connectorKey" type="xs:string" use="required" />
+		<xs:attribute name="blockId" type="xs:string" use="optional" />
+		<xs:attribute name="value" type="xs:string" use="optional" />
+		<xs:attribute name="i18nKey" type="xs:string" use="optional" />
+		<xs:attribute name="type" type="xs:string" use="optional" />
+		<xs:attribute name="separator" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="blockType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="actions" type="actionsType" />
+			<xs:element name="blockWeb" type="blockWebType" />
+			<xs:element name="templateArgs" type="templateArgsType" />
+		</xs:choice>
+
+		<xs:attribute name="id" type="xs:string" use="optional" />
+		<xs:attribute name="className" type="xs:string" use="optional" />
+		<xs:attribute name="product" type="xs:string" use="optional" />
+		<xs:attribute name="version" type="xs:string" use="optional" />
+		<xs:attribute name="template" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="templateArgsType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="serviceArg" type="serviceArgType" />
+			<xs:element name="connectorArg" type="connectorArgType" />
+			<xs:element name="valueArg" type="valueArgType" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="serviceArgType">
+		<xs:complexContent>
+			<xs:extension base="serviceEndPointType">
+				<xs:attribute name="argKey" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="connectorArgType">
+		<xs:complexContent>
+			<xs:extension base="connectorEndPointType">
+				<xs:attribute name="argKey" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="valueArgType">
+		<xs:complexContent>
+			<xs:extension base="valueEndPointType">
+				<xs:attribute name="argKey" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="referenceType">
+		<xs:attribute name="key" type="xs:string" />
+		<xs:attribute name="file" type="xs:string" />
+		<xs:attribute name="embedded" type="xs:boolean" default="false" />
+		<xs:attribute name="type" use="optional" default="template">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="template" />
+					<xs:enumeration value="icon" />
+					<xs:enumeration value="image" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	
+</xs:schema>

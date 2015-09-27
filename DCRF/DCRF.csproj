@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6A64B722-8F06-40B6-AAD3-3321BAF69DC1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCRF</RootNamespace>
+    <AssemblyName>DCRF</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\BlockHandleAttribute.cs" />
+    <Compile Include="Attributes\BlockTagAttribute.cs" />
+    <Compile Include="Attributes\BlockTypeAttribute.cs" />
+    <Compile Include="Attributes\BlockCommentsAttribute.cs" />
+    <Compile Include="Attributes\BlockCompanyAttribute.cs" />
+    <Compile Include="Attributes\BlockFriendlyNameAttribute.cs" />
+    <Compile Include="Attributes\BlockPlatformAttribute.cs" />
+    <Compile Include="Attributes\BlockReleaseDateAttribute.cs" />
+    <Compile Include="Dynamic\DBServiceDefinition.cs" />
+    <Compile Include="Dynamic\DBSLineDefinition.cs" />
+    <Compile Include="Dynamic\DynamicBlock.cs" />
+    <Compile Include="Dynamic\DBDefinition.cs" />
+    <Compile Include="Interface\IBlockBroker.cs" />
+    <Compile Include="Interface\IBlockBrokerOptions.cs" />
+    <Compile Include="Primitive\BlockSysEventArgs.cs" />
+    <Compile Include="Primitive\BlockWebSysEventArgs.cs" />
+    <Compile Include="Contract\IConnector.cs" />
+    <Compile Include="Contract\Impl\BlockConnector.cs" />
+    <Compile Include="Contract\Impl\BlockConnectorBase.cs" />
+    <Compile Include="Contract\Impl\BlockEvent.cs" />
+    <Compile Include="Contract\Impl\BlockProperty.cs" />
+    <Compile Include="Contract\Impl\BlockReference.cs" />
+    <Compile Include="Interface\IContainerBlockWeb.cs" />
+    <Compile Include="Primitive\ConnectorSysEventArgs.cs" />
+    <Compile Include="Proxy\k.cs" />
+    <Compile Include="Proxy\ProxyBlock.cs" />
+    <Compile Include="Proxy\ProxyBlockWeb.cs" />
+    <Compile Include="Proxy\ProxyConnector.cs" />
+    <Compile Include="Interface\IContainedBlock.cs" />
+    <Compile Include="Interface\IContainerBlock.cs" />
+    <Compile Include="Primitive\LogType.cs" />
+    <Compile Include="Primitive\MissingValue.cs" />
+    <Compile Include="DBC\CheckLessThanAttribute.cs" />
+    <Compile Include="Definition\SysEvent.cs" />
+    <Compile Include="Contract\IConnectorSubject.cs" />
+    <Compile Include="Primitive\BlockMetaInfoType.cs" />
+    <Compile Include="DBC\CheckNotNullAttribute.cs" />
+    <Compile Include="Definition\MsgCode.cs" />
+    <Compile Include="Contract\Connector.cs" />
+    <Compile Include="Definition\PlatformType.cs" />
+    <Compile Include="Primitive\ValueTypeHolder.cs" />
+    <Compile Include="Core\BlockBase.cs" />
+    <Compile Include="Helper\BlockHelper.cs" />
+    <Compile Include="Primitive\BlockHandle.cs" />
+    <Compile Include="Attributes\BlockServiceAttribute.cs" />
+    <Compile Include="Definition\BlockType.cs" />
+    <Compile Include="Primitive\BlockVersion.cs" />
+    <Compile Include="DBC\DBC.cs" />
+    <Compile Include="Helper\DCRFHelper.cs" />
+    <Compile Include="Interface\IBlock.cs" />
+    <Compile Include="Interface\IBlockWeb.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\BlockWeb.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeLog.txt" />
+    <Content Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetSockets\NetSockets.csproj">
+      <Project>{bd34bebb-9ee0-4d18-b504-c2f522925642}</Project>
+      <Name>NetSockets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

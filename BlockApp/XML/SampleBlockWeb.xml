@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<dcrf>
+	<blockWeb id="a">
+		<reference key="tmp" file="templates.xml" type="template" />
+		<reference key="img1" file="box-3.png" type="image" />
+		<actions>
+			<setProperty connectorKey="FormId" value="frmMain" />
+		</actions>
+		<blocks>
+			<block id="frmMain" className="WinForm">
+				<actions>
+					<setProperty connectorKey="Width" value="100" type="System.Int32" />
+					<setProperty connectorKey="Height" value="300" type="System.Int32" />
+				</actions>
+				<blockWeb>
+					<blocks>
+						<block id="tbl1" className="TableLayout">
+							<actions>
+								<setProperty connectorKey="Rows" value="3" type="System.Int32" />
+								<setProperty connectorKey="Columns" value="3" type="System.Int32" />
+								<setProperty connectorKey="ColumnStyles" value="30%,30%,40%" type="System.String[]" separator="," />
+								<setVariable name="a">
+									<valueEndPoint type="System.Int32" value="11" />
+								</setVariable>
+
+							</actions>
+							<blockWeb>
+								<blocks>
+									<block className="Label" template="tmp\block[SimpleLabel]" >
+										<templateArgs>
+											<valueArg argKey="TXT" value="Hello world" />
+											<valueArg argKey="R" value="0" />
+											<valueArg argKey="C" value="0" />
+										</templateArgs>
+										<actions>
+											<setProperty connectorKey="Bold" value="true" type="System.Boolean" />
+										</actions>
+									</block>
+
+									<block className="Label" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="TXT" value="Hello2 world2" />
+											<valueArg argKey="R" value="0" />
+											<valueArg argKey="C" value="1" />
+										</templateArgs>
+									</block>
+
+									<block id="LookupLbl1" className="LookupLabel" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="TXT" value="default" />
+											<valueArg argKey="R" value="0" />
+											<valueArg argKey="C" value="2" />
+										</templateArgs>
+										<actions>
+											<setProperty connectorKey="Key" value="USER_SCORE" />
+											<setProperty connectorKey="Table" value="TABLE2" />
+											<setProperty connectorKey="DisplayField" value="TITLE" />
+											<setProperty connectorKey="PKField" value="PK_ID" />
+											<setProperty connectorKey="Text" value="lookuplbl" />
+										</actions>
+									</block>
+
+									<block id="txt" className="TextBox" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="TXT" value="def" />
+											<valueArg argKey="R" value="1" />
+											<valueArg argKey="C" value="0" />
+										</templateArgs>
+										<actions>
+											<attachServiceEndPoint connectorKey="EndPointAttached.Text">
+												<serviceEndPoint blockId="txt" service="SetText" />
+											</attachServiceEndPoint>
+											<attachValueEndPoint connectorKey="Text">
+												<valueEndPoint value="Hello World!" type="System.String" />
+											</attachValueEndPoint>
+										</actions>
+									</block>
+
+									<block id="username" className="TextBox" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="R" value="1" />
+											<valueArg argKey="C" value="1" />
+										</templateArgs>
+										<actions>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="USER_NAME">
+												<serviceEndPoint service="GetText" />
+											</attachServiceEndPoint>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="EndPointAttached.USER_NAME">
+												<serviceEndPoint service="SetText" />
+											</attachServiceEndPoint>
+										</actions>
+									</block>
+
+									<block id="pkid" className="TextBox" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="R" value="1" />
+											<valueArg argKey="C" value="2" />
+										</templateArgs>
+										<actions>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="PK_ID">
+												<serviceEndPoint service="GetText" />
+											</attachServiceEndPoint>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="EndPointAttached.PK_ID">
+												<serviceEndPoint service="SetText" />
+											</attachServiceEndPoint>
+										</actions>
+									</block>
+
+									<block id="userscore" className="TextBox" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="R" value="2" />
+											<valueArg argKey="C" value="0" />
+										</templateArgs>
+										<actions>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="USER_SCORE">
+												<serviceEndPoint service="GetText" />
+											</attachServiceEndPoint>
+											<attachServiceEndPoint blockId="frmMain" connectorKey="EndPointAttached.USER_SCORE">
+												<serviceEndPoint service="SetText" />
+											</attachServiceEndPoint>
+										</actions>
+									</block>
+
+									<block id="okbutton" className="Button" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="R" value="2" />
+											<valueArg argKey="C" value="1" />
+										</templateArgs>
+										<actions>
+											<setProperty connectorKey="Text" value="Save" type="System.String" />
+											<attachConnectorEndPoint connectorKey="Click">
+												<connectorEndPoint connectorKey="FormSubmit" blockId="frmMain" />
+											</attachConnectorEndPoint>
+											<attachServiceEndPoint connectorKey="Click">
+												<serviceEndPoint service="SaveData" blockId="saver1" />
+											</attachServiceEndPoint>
+											<setProperty connectorKey="image" value="@img1" />
+										</actions>
+									</block>
+
+									<block id="reqChecker" className="RequiredFieldValidator" template="tmp\block[SimpleLabel]">
+										<templateArgs>
+											<valueArg argKey="R" value="2" />
+											<valueArg argKey="C" value="2" />
+										</templateArgs>
+										<actions>
+											<setProperty connectorKey="FieldToValidate" value="PK_ID" type="System.String" />
+											<attachServiceEndPoint blockId="frmMain" connectorKey="FormSubmit">
+												<serviceEndPoint service="PerformValidation" />
+											</attachServiceEndPoint>
+										</actions>
+										<blockWeb>
+											<blocks>
+												<block id="ReqLbl1" className="Label">
+													<actions>
+														<setProperty connectorKey="Text" value="id is required" type="System.String" />
+														<setProperty connectorKey="Visible" value="false" type="System.Boolean" />
+													</actions>
+												</block>
+											</blocks>
+										</blockWeb>
+									</block>
+								</blocks>
+							</blockWeb>
+						</block>
+						<include template="tmp\mahdi" />
+						<block id="bt" className="Button" template="tmp\block[t1]" />
+						<block id="chk1" className="CheckBox">
+							<actions>
+								<setProperty connectorKey="Text" value="checkbox 1" />
+							</actions>
+						</block>
+					</blocks>
+				</blockWeb>
+			</block>
+		</blocks>
+	</blockWeb>
+</dcrf>
